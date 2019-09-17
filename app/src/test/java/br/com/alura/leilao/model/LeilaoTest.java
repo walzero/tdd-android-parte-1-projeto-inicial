@@ -22,9 +22,9 @@ public class LeilaoTest {
         Leilao console = new Leilao("Console");
         console.propoe(new Lance(new Usuario("Alex"), 200.0));
 
-        double maiorLanceDevolvidoDoConsole = console.getMaiorLance();
+        double maiorLanceDevolvido = console.getMaiorLance();
 
-        assertEquals(200.0, maiorLanceDevolvidoDoConsole, 0.0001);
+        assertEquals(200.0, maiorLanceDevolvido, 0.0001);
     }
 
     @Test
@@ -33,9 +33,9 @@ public class LeilaoTest {
         computador.propoe(new Lance(new Usuario("Alex"), 100.0));
         computador.propoe(new Lance(new Usuario("Fran"), 200.0));
 
-        double maiorLanceDevolvidoDoComputador = computador.getMaiorLance();
+        double maiorLanceDevolvido = computador.getMaiorLance();
 
-        assertEquals(200.0, maiorLanceDevolvidoDoComputador, 0.0001);
+        assertEquals(200.0, maiorLanceDevolvido, 0.0001);
     }
 
     @Test
@@ -44,8 +44,40 @@ public class LeilaoTest {
         carro.propoe(new Lance(new Usuario("Alex"), 10000.0));
         carro.propoe(new Lance(new Usuario("Fran"), 9000.0));
 
-        double maiorLanceDevolvidoDoCarro = carro.getMaiorLance();
+        double maiorLanceDevolvido = carro.getMaiorLance();
 
-        assertEquals(10000.0, maiorLanceDevolvidoDoCarro, 0.0001);
+        assertEquals(10000.0, maiorLanceDevolvido, 0.0001);
+    }
+
+    @Test
+    public void getMenorLanceQuandoRecebeApenasUmLanceDevolveMenorrLance() {
+        Leilao console = new Leilao("Computador");
+        console.propoe(new Lance(new Usuario("Alex"), 200.0));
+
+        double menorLanceDevolvido= console.getMenorLance();
+
+        assertEquals(200.0, menorLanceDevolvido, 0.0001);
+    }
+
+    @Test
+    public void getMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemCrescenteDevolveMenorLance() {
+        Leilao computador = new Leilao("Computador");
+        computador.propoe(new Lance(new Usuario("Alex"), 100.0));
+        computador.propoe(new Lance(new Usuario("Fran"), 200.0));
+
+        double menorLanceDevolvido = computador.getMenorLance();
+
+        assertEquals(100.0, menorLanceDevolvido, 0.0001);
+    }
+
+    @Test
+    public void getMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemDecrescenteDevolveMenorLance() {
+        Leilao carro = new Leilao("Carro");
+        carro.propoe(new Lance(new Usuario("Alex"), 10000.0));
+        carro.propoe(new Lance(new Usuario("Fran"), 9000.0));
+
+        double menorLanceDevolvido = carro.getMenorLance();
+
+        assertEquals(9000.0, menorLanceDevolvido, 0.0001);
     }
 }
